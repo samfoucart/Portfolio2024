@@ -12,7 +12,7 @@ public class HealthCheckController {
     // tag::get-aggregate-root[]
     @GetMapping("/health")
     public String healthCheck() {
-        logger.info("health check hit");
+        // logger.info("health check hit");
         return "Site is live";
     }
 }
