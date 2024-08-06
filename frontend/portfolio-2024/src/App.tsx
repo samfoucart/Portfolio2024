@@ -1,6 +1,23 @@
+import { useEffect, useState } from "react";
 import "./App.css";
+import { UserResponseBody } from "./UserResponseBody";
+import UserCard from "./UserCard";
 
 function App() {
+  const [users, setUsers] = useState<UserResponseBody[]>([]);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      const response = await fetch('https://api.samfoucart.com/users');
+      if (response.ok) {
+        const users: UserResponseBody[] = await response.json();
+        // console.log(users);
+        setUsers(users);
+      }
+    }
+    fetchUsers();
+  }, []);
+
   return (
     <>
       <div className="h-dvh flex flex-col">
@@ -33,7 +50,9 @@ function App() {
                   joined them.
                 </p>
               </div>
-              <div className="card-shadow flex-1 basis-1/3 max-w-max bg-white border-black border-4 p-24"></div>
+              <div className="card-shadow flex-1 basis-1/3 max-w-max bg-white border-black border-4 p-24">
+                <UserCard users={users}></UserCard>
+              </div>
             </div>
           </div>
           <div className="flex flex-col justify-center">
