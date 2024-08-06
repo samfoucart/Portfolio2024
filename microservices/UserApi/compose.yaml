@@ -1,0 +1,25 @@
+services:
+  portfolio-api-sam4:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - portfolio-network
+    depends_on:
+      - postgres
+
+  postgres:
+    image: 'postgres:latest'
+    restart: always
+    environment:
+      - 'POSTGRES_DB=mydatabase'
+      - 'POSTGRES_PASSWORD=secret'
+      - 'POSTGRES_USER=myuser'
+    ports:
+      - '5432:5432'
+    networks:
+      - portfolio-network
+networks:
+  portfolio-network:
+    driver: bridge
