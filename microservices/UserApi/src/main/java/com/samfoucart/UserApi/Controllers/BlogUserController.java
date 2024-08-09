@@ -23,7 +23,7 @@ public class BlogUserController {
     // Aggregate root
     // tag::get-aggregate-root[]
     @GetMapping("/users")
-    @CrossOrigin(origins = {"http://localhost:5173/"})
+    @CrossOrigin(origins = {"http://localhost:5173/", "https://www.samfoucart.com"})
     List<BlogUser> all() {
         // logger.info("users endpoint hit");
         return (List<BlogUser>) userRepository.findAll();
